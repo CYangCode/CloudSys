@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include <QIcon>
+#include "dokanthread.h"
 #include "fileinforesolver.h"
 namespace Ui {
 class IconDisplayerWidget;
@@ -54,7 +55,8 @@ private slots:
 
 private:
     Ui::IconDisplayerWidget *ui;
-    FileInfoResolver * fileInfoResolver;
+    FileInfoResolver * pFileInfoResolver;
+    DokanThread * pDokanThread;
 };
 
 #endif // ICONDISPLAYERWIDGET_H

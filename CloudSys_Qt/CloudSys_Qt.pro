@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     icondisplayerwidget.cpp \
     fileinforesolver.cpp \
     tcp.cpp \
-    ftpclient.cpp
+    ftpclient.cpp \
+    dokanthread.cpp
 
 HEADERS  += mainwindow.h \
     login.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     icondisplayerwidget.h \
     fileinforesolver.h \
     tcp.h \
-    ftpclient.h
+    ftpclient.h \
+    dokanthread.h
 
 FORMS    += mainwindow.ui \
     login.ui \

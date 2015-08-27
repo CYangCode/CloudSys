@@ -9,14 +9,16 @@
 #include "tcp.h"
 
 IconDisplayerWidget::IconDisplayerWidget(QWidget *parent) :
-    QMainWindow(parent),fileInfoResolver(NULL),
+    QMainWindow(parent),pFileInfoResolver(NULL), pDokanThread(NULL),
     ui(new Ui::IconDisplayerWidget)
 {
     ui->setupUi(this);
     //文字提示
     ui->searchLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     ui->searchLineEdit->setPlaceholderText(QString("请输入搜索内容"));
+    pDokanThread = new DokanThread();
     connect(ui->searchLineEdit, &QLineEdit::textEdited, this, &IconDisplayerWidget::searchListByName);
+    connect(this, &IconDisplayerWidget::destroyed, pDokanThread, &DokanThread::quit);
 }
 
 IconDisplayerWidget::~IconDisplayerWidget()
@@ -38,7 +40,7 @@ QListWidget * IconDisplayerWidget::getListWidget()
 void IconDisplayerWidget::searchListByName()
 {
     QString searchContent = ui->searchLineEdit->text();
-    QList<QString> * list = fileInfoResolver->getFileInfosContains(searchContent);
+    QList<QString> * list = pFileInfoResolver->getFileInfosContains(searchContent);
 //    for (QList<QString>::iterator ite = list->begin(); ite != list->end(); ++ite) {
 //        qDebug() << (*ite);
 //    }
@@ -53,16 +55,7 @@ void IconDisplayerWidget::show()
     /*
      * 获得通过服务器传过来的图标信息,并在ListWidget进行添加图标信息
      */
-    // 测试--------------------------
-//    QList<QString> fileInfoList;
-//    fileInfoList.push_back("2.txt");
-//    fileInfoList.push_back("2.doc");
-//    fileInfoList.push_back("2.jpg");
-//    fileInfoList.push_back("2.zip");
-//    fileInfoList.push_back("2.ppt");
-//    //==================================
-//    fileInfoResolver = new FileInfoResolver(fileInfoList);
-//    fileInfoResolver->addIconToQListWidget(this->getListWidget());
+    pDokanThread->start();
     refreshIconInfo();
     QMainWindow::show();
 }
@@ -83,38 +76,42 @@ void IconDisplayerWidget::refreshIconInfo()
         this->getListWidget()->clear();
         return;
     }
-    if (fileInfoResolver != NULL)
-        delete fileInfoResolver;
-    fileInfoResolver = new FileInfoResolver(fileList);
+    if (pFileInfoResolver != NULL)
+        delete pFileInfoResolver;
+    pFileInfoResolver = new FileInfoResolver(fileList);
     this->getListWidget()->clear();
-    fileInfoResolver->addIconToQListWidget(this->getListWidget());
+    pFileInfoResolver->addIconToQListWidget(this->getListWidget());
 }
 
 void IconDisplayerWidget::on_backButton_clicked()
 {
     ui->iconPlayerWidget->clear();
-    fileInfoResolver->addIconToQListWidget(this->getListWidget());
+    pFileInfoResolver->addIconToQListWidget(this->getListWidget());
 }
 
 void IconDisplayerWidget::on_uploadButton_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(0, tr("选择上传文件"), ".", tr("所有文件(*)"));
-    if(path.length() == 0) {
+    QString originalPath = QFileDialog::getOpenFileName(0, tr("选择上传文件"), ".", tr("所有文件(*)"));
+
+    if(originalPath.length() == 0) {
         QMessageBox::information(NULL, tr("提示"), tr("你没有选择任何文件!"));
-    } else {
-        qDebug() << path;
-        //将文件通过ftp传至服务器端然后刷新QListWidget
-        TCP tcp(Global::SERVER_IP, Global::SERVICE_COMMON_PORT);
-        tcp.send("#U#");
-        tcp.send(Global::USER_NAME);
-        tcp.send("#END#");
-        FtpClient client;
-        client.uploadFile(path);
-        tcp.send("#OK#");
-        tcp.send("#END#");
-        tcp.shutdown();
-        refreshIconInfo();
+        return;
     }
+    FileHandler fileHandler;
+    QString path = "M:/" + fileHandler.getFileNameByFilePath(originalPath);
+    //将源文件放入dokan创建的虚拟磁盘中, 对应的文件名是源文件名, 暂不对文件名进行加密操作
+    fileHandler.writeFile(path, fileHandler.readFile(originalPath));
+    //将文件通过ftp传至服务器端然后刷新QListWidget
+    TCP tcp(Global::SERVER_IP, Global::SERVICE_COMMON_PORT);
+    tcp.send("#U#");
+    tcp.send(Global::USER_NAME);
+    tcp.send("#END#");
+    FtpClient client;
+    client.uploadFile(path);
+    tcp.send("#OK#");
+    tcp.send("#END#");
+    tcp.shutdown();
+    refreshIconInfo();
 }
 
 void IconDisplayerWidget::on_downLoadButton_clicked()
