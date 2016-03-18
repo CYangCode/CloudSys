@@ -56,7 +56,6 @@ private:
     QString content;
     QUrl url;
     QNetworkRequest * request;//该QNetworkReply类包含的数据和标题,对QNetworkAccessManager发送请求
-    static const QString FTP_SERVER_IP ;
     static const QString DEFAULT_PWD;
     static const int FTP_SERVER_UPLOAD_PORT = 23334;
     static const int FTP_SERVER_DOWNLOAD_PORT = 23335;

@@ -32,9 +32,8 @@ QIcon IconProvider::fileExtensionIcon(const QString &extension) const
         tmp_file.open(QIODevice::WriteOnly);
 
         tmp_file.close();
-     //   qCritical()<<QString("failed to write temporary file %1") .arg(tmp_file.fileName());
     }
-
+   // qDebug() << file_name;
     QIcon icon = icon_provider.icon(QFileInfo(file_name));
     return icon;
 }

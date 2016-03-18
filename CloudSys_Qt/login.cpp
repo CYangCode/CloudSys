@@ -7,7 +7,6 @@
 #include "global.h"
 #include "icondisplayerwidget.h"
 
-QString KEY;
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
@@ -102,7 +101,6 @@ void Login::readMsg()
         Global::DECODING_KEY = ui->key->text();
         IconDisplayerWidget * widget = new IconDisplayerWidget;
         widget->show();
-    //    QMessageBox::information(this, "信息", "登录成功！");
     } else {
         QMessageBox::information(this, "信息", "用户名或密码错误");
     }

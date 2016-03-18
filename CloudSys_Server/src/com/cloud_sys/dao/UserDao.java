@@ -11,7 +11,7 @@ public class UserDao extends BaseDao {
 	 * @return 1代表执行正确
 	 */
 	public int addUser(User user) {
-		String sql = "insert into user values (?,?,?,?)";
+		String sql = "insert into user (`user_name`, `user_pwd`, `user_phone`, `user_mail`) values (?,?,?,?)";
 		String[] param = { user.getName(), user.getPassword(),
 				user.getPhone(), user.getEmail()};
 		return executeUpdate(sql, param);
@@ -55,14 +55,14 @@ public class UserDao extends BaseDao {
 //		System.out.println(user);
 		
 		//测试addUser方法
-//		User user = new User();
-//		user.setName("yjx2");
-//		user.setPassword("123");
-//
-//		user.setPhone("731287812");
-//		user.setEmail("hahah@qq.com");
-//		UserDao userDao = new UserDao();
-//		userDao.addUser(user);
+		User user = new User();
+		user.setName("yjx2");
+		user.setPassword("123");
+
+		user.setPhone("731287812");
+		user.setEmail("hahah@qq.com");
+		UserDao userDao = new UserDao();
+		userDao.addUser(user);
 	}
 	
 }

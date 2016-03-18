@@ -8,7 +8,12 @@ class DokanThread: public QThread
     Q_OBJECT
 public:
     DokanThread();
+    void setCmd(QString cmd);
     void run();
+public:
+    void quit();
+private:
+    QString cmd;
 };
 
 #endif // DOKANTHREAD_H

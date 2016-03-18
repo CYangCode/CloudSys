@@ -44,13 +44,6 @@ void MainWindow::on_writeFileButton_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         FileHandler handler;
-//        int aff = handler.writeFile(path, ui->textEdit->toPlainText());
-//        if (aff == -1) {
-//            QMessageBox::warning(this, "Error", "文件写入失败!");
-//        } else {
-//            QMessageBox::information(this, "Information", "文件写入成功");
-//        }
-
     }
 }
 

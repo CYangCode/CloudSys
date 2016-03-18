@@ -65,6 +65,6 @@ TCP::TCP(QString address, qint16 port)
     tcp->connectToHost(address, port);
 
     if(!tcp->waitForConnected(3 * 1000)) {
-        qDebug() << "TCP初始化连接超时. TCP::TCP(QString, qint16)";
+       // qDebug() << "TCP初始化连接超时. TCP::TCP(QString, qint16)";
     }
 }

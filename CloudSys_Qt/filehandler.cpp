@@ -24,16 +24,6 @@ QByteArray FileHandler::readFile(QString filePath)
 
 int FileHandler::writeFile(QString filePath, QByteArray content)
 {
-//    QFile file(fileName);
-//    if (!file.open(QIODevice::WriteOnly)) {
-//        QMessageBox::warning(0, "警告", "文件下载失败");
-//        return;
-//    }
-
-//    QTextStream out(&file);
-//    out << content;
-//    file.close();
-
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
         QMessageBox::warning(0, "警告", "文件下载失败");

@@ -5,8 +5,9 @@
 #include <QIoDevice>
 #include <QMessageBox>
 #include <QTextStream>
-const QString FtpClient::FTP_SERVER_IP = "49.140.98.76";
+
 const QString FtpClient::DEFAULT_PWD = "0";
+
 FtpClient::FtpClient(QObject *parent) :
     QObject(parent)
 {
@@ -38,7 +39,7 @@ void FtpClient::downloadFile(QString downloadFileName, QString desFilePath)
     loop->exec();
 
     QByteArray byte = reply->readAll();
-    qDebug() << content.length();
+   // qDebug() << content.length();
     FileHandler fileHandler;
     fileHandler.writeFile(desFilePath, byte);
    // reply->deleteLater();   //最后要释放reply对象
@@ -53,14 +54,14 @@ void FtpClient::uploadFile(QString filePath)
     url.setPath(fromUnicodeToUtf(fileName));
     url.setPort(Global::FTP_SERVER_UPLOAD_PORT);
 //"FtpClient::uploadFile::url:" +
-    qDebug() <<  url.toString();
+ //   qDebug() <<  url.toString();
     QNetworkRequest * request = new QNetworkRequest(url);
     request->setUrl(url);
     manager->put(*request, content);
     QEventLoop * loop = new QEventLoop;
     connect(manager, SIGNAL(finished(QNetworkReply*)), loop, SLOT(quit()));
     loop->exec();
-    qDebug() << "FtpClient::uploadFile loop end";
+//    qDebug() << "FtpClient::uploadFile loop end";
     delete request;
 }
 

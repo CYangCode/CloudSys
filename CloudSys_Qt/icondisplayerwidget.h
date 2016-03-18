@@ -42,17 +42,18 @@ public:
      * @return
     */
     void refreshIconInfo();
+protected:
+    void closeEvent(QCloseEvent *);
 private slots:
     void on_uploadButton_clicked();
 
     void searchListByName();
 
-    void on_backButton_clicked();
-
     void on_downLoadButton_clicked();
 
     void on_deleteButton_clicked();
 
+    void terminateDokan();
 private:
     Ui::IconDisplayerWidget *ui;
     FileInfoResolver * pFileInfoResolver;

@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>加密云存储系统</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="cloud">
+    <normaloff>cloud.png</normaloff>cloud.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
 background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.988636, y2:0.369, stop:0.102273 rgba(95, 216, 142, 255), stop:0.909091 rgba(198, 198, 198, 255));
@@ -45,6 +49,15 @@ background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.988636, y2:0.369, stop:0
 background:rgb(197, 254, 246);
 border-radius:10px;
 }</string>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOn</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="autoScrollMargin">
+     <number>6</number>
     </property>
     <property name="movement">
      <enum>QListView::Static</enum>
@@ -153,16 +166,16 @@ margin:0px;
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>0</y>
-      <width>161</width>
-      <height>71</height>
+      <y>10</y>
+      <width>160</width>
+      <height>58</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Administrator/Pictures/openstakc.png</pixmap>
+     <pixmap>C:/Users/Administrator/Pictures/2fe48d415a1c0cc1399910f3ed06441a.jpg</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="deleteButton">

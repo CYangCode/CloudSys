@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+background:rgb(255, 85, 255);
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
@@ -40,7 +45,7 @@
    <widget class="QPushButton" name="writeFileButton">
     <property name="geometry">
      <rect>
-      <x>289</x>
+      <x>290</x>
       <y>270</y>
       <width>111</width>
       <height>31</height>

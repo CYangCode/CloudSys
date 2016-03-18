@@ -15,7 +15,8 @@ import com.mysql.jdbc.ResultSetMetaData;
 
 public class BaseDao {
 
-	private String url = "jdbc:mysql://49.140.58.25:3306/";
+	//private String url = "jdbc:mysql://49.140.58.25:3306/";
+	private String url = "jdbc:mysql://127.0.0.1:3306/";
 	private String dbs = "cloud_sys";
 	private String user = "root";
 	private String pwd = "1234";

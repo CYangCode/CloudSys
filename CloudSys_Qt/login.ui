@@ -100,7 +100,7 @@ margin:0px;
 }</string>
       </property>
       <property name="text">
-       <string/>
+       <string>cy</string>
       </property>
       <property name="maxLength">
        <number>20</number>
@@ -139,7 +139,7 @@ margin:0px;
        <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
       </property>
       <property name="text">
-       <string/>
+       <string>1234</string>
       </property>
       <property name="maxLength">
        <number>20</number>
@@ -175,7 +175,7 @@ margin:0px;
 }</string>
       </property>
       <property name="text">
-       <string/>
+       <string>1234</string>
       </property>
       <property name="maxLength">
        <number>20</number>
@@ -208,7 +208,7 @@ margin:0px;
 }</string>
       </property>
       <property name="text">
-       <string/>
+       <string>1234</string>
       </property>
       <property name="maxLength">
        <number>20</number>
